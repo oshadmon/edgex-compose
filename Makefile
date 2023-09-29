@@ -56,6 +56,7 @@ portainer-down:
 
 pull:
 	${DOCKER_COMPOSE} -f docker-compose${NO_SECURITY}${ARM64}.yml pull ${SERVICES}
+	${DOCKER_COMPOSE} -f docker-compose${NO_SECURITY}${ARM64}.yml pull anylog-node
 
 run:
 	${DOCKER_COMPOSE} -p edgex -f docker-compose${NO_SECURITY}${APP_SAMPLE}${ARM64}.yml up -d ${SERVICES}
