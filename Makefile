@@ -78,4 +78,4 @@ get-consul-acl-token:
 
 # Define the target to start 'anylog-node'
 anylog-node:
-    ${DOCKER_COMPOSE} -p edgex -f docker-compose${NO_SECURITY}${APP_SAMPLE}${ARM64}.yml up -d anylog-node
+	${DOCKER_COMPOSE} -p edgex -f docker-compose${NO_SECURITY}${APP_SAMPLE}${ARM64}.yml up -d anylog-node
