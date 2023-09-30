@@ -26,6 +26,22 @@
 #
 name: edgex
 services:
+  anylog-node:
+    image: anylogco/anylog-network:beta
+    restart: always
+    env_file:
+      - compose-builder/anylog_configs.env
+    environment:
+      INIT_TYPE: prod
+    container_name: anylog-node
+    stdin_open: true
+    tty: true
+    network_mode: host
+    volumes:
+      - anylog-operator-anylog:/app/AnyLog-Network/anylog
+      - anylog-operator-blockchain:/app/AnyLog-Network/blockchain
+      - anylog-operator-data:/app/AnyLog-Network/data
+      - anylog-operator-local-scripts:/app/deployment-scripts
   app-rules-engine:
     container_name: edgex-app-rules-engine
     depends_on:
@@ -462,6 +478,10 @@ networks:
     name: edgex_edgex-network
     driver: bridge
 volumes:
+  anylog-operator-anylog:
+  anylog-operator-blockchain:
+  anylog-operator-data:
+  anylog-operator-local-scripts:
   consul-config:
     name: edgex_consul-config
   consul-data:
