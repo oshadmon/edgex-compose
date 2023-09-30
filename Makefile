@@ -66,8 +66,8 @@ down:
 
 clean:
 	$(call COMPOSE_DOWN,-v)
-    docker stop edgex-app-mqtt-export anylog-node &&
-    docker rm edgex-app-mqtt-export anylog-node &&
+    docker stop edgex-app-mqtt-export anylog-node
+    docker rm edgex-app-mqtt-export anylog-node
 
 clean-network:
 	${DOCKER_COMPOSE} -p edgex -f docker-compose.yml -f docker-compose-with-app-sample.yml down --remove-orphans
