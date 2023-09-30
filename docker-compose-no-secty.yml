@@ -474,14 +474,13 @@ services:
       bind:
         create_host_path: true
   app-mqtt-export:
-    image: ${APP_SVC_REPOSITORY}/app-service-configurable${ARCH}:${APP_SERVICE_CONFIG_VERSION}
+    image: nexus3.edgexfoundry.org:10004/app-service-configurable:latest
     ports:
       - 127.0.0.1:59703:59703/tcp
     container_name: edgex-app-mqtt-export
     hostname: edgex-app-mqtt-export
-    env_file:
-      - common-non-security.env
     environment:
+      EDGEX_SECURITY_SECRET_STORE: false
       SERVICE_HOST: edgex-app-mqtt-export
       EDGEX_PROFILE: mqtt-export
       WRITABLE_PIPELINE_FUNCTIONS_MQTTEXPORT_PARAMETERS_BROKERADDRESS: 18.229.34.42:32150
@@ -496,7 +495,7 @@ services:
       - edgex-network
     security_opt:
       - no-new-privileges:true
-    user: "${EDGEX_USER}:${EDGEX_GROUP}"
+    user: "2002:2001"
     volumes:
       # use host timezone
       - /etc/localtime:/etc/localtime:ro
