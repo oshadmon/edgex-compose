@@ -56,7 +56,6 @@ portainer-down:
 
 pull:
 	${DOCKER_COMPOSE} -f docker-compose${NO_SECURITY}${ARM64}.yml pull ${SERVICES}
-	${DOCKER_COMPOSE} -f docker-compose${NO_SECURITY}${ARM64}.yml pull anylog-node
 
 run:
 	${DOCKER_COMPOSE} -p edgex -f docker-compose${NO_SECURITY}${APP_SAMPLE}${ARM64}.yml up -d ${SERVICES}
@@ -77,6 +76,44 @@ get-consul-acl-token:
 	ARCH=$(ARCH) \
 	cd ./compose-builder; sh ./get-consul-acl-token.sh
 
-# Define the target to start 'anylog-node'
-anylog-node:
-	${DOCKER_COMPOSE} -p edgex -f docker-compose${NO_SECURITY}${APP_SAMPLE}${ARM64}.yml up -d anylog-node
+# Docker Compose-related targets
+
+# Define the name of your Docker Compose file
+COMPOSE_FILE := docker-compose-with-app-sample.yml
+
+# Define default target
+default: help
+
+help:
+	@echo "Available targets:"
+	@echo "  start            Start containers"
+	@echo "  stop             Stop containers"
+	@echo "  restart          Restart containers"
+	@echo "  rebuild          Rebuild containers"
+	@echo "  clean            Clean up containers and volumes"
+	@echo "  logs             View container logs"
+	@echo "  ps               List running containers"
+
+start:
+	docker-compose -f $(COMPOSE_FILE) up -d
+
+stop:
+	docker-compose -f $(COMPOSE_FILE) down
+
+restart:
+	docker-compose -f $(COMPOSE_FILE) restart
+
+rebuild:
+	docker-compose -f $(COMPOSE_FILE) up --build -d
+
+clean: stop
+	docker-compose -f $(COMPOSE_FILE) rm -f
+	docker volume prune -f
+
+logs:
+	docker-compose -f $(COMPOSE_FILE) logs -f
+
+ps:
+	docker-compose -f $(COMPOSE_FILE) ps
+
+.PHONY: help start stop restart rebuild clean logs ps
