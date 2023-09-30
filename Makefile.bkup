@@ -13,7 +13,7 @@
 #  *
 #  *******************************************************************************/
 
-.PHONY: help portainer portainer-down pull run pull-ui run-ui down-ui down clean get-token clean-network
+.PHONY: help portainer portainer-down pull run pull-ui run-ui down-ui down clean get-token
 .SILENT: help get-token
 
 help:
@@ -24,7 +24,7 @@ $(eval $(ARGS):;@:)
 
 OPTIONS:=" arm64 no-secty app-sample " # Must have spaces around words for `filter-out` function to work properly
 
-# This tool now only supports compose V2, aka "docker compose" as it has replaced the old docker-compose tool.
+# This tool now only supports compose V2, aka "docker compose" as it has replaced to old docker-compose tool.
 DOCKER_COMPOSE=docker compose
 
 ifeq (arm64, $(filter arm64,$(ARGS)))
@@ -44,8 +44,8 @@ define COMPOSE_DOWN
 	${DOCKER_COMPOSE} -p edgex -f docker-compose.yml -f docker-compose-with-app-sample.yml down $1
 endef
 
-# Define additional phony targets for all options to enable support for tab-completion in the shell
-# Note: This must be defined after the options are parsed; otherwise, it will interfere with them
+# Define additional phony targets for all options to enable support for tab-completion in shell
+# Note: This must be defined after the options are parsed otherwise it will interfere with them
 .PHONY: $(OPTIONS)
 
 portainer:
@@ -66,10 +66,6 @@ down:
 
 clean:
 	$(call COMPOSE_DOWN,-v)
-
-clean-network:
-	${DOCKER_COMPOSE} -p edgex -f docker-compose.yml -f docker-compose-with-app-sample.yml down --remove-orphans
-	${DOCKER_COMPOSE} -p edgex -f docker-compose.yml -f docker-compose-with-app-sample.yml network rm edgex_edgex-network
 
 get-token:
 	DEV=$(DEV) \

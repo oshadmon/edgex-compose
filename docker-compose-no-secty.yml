@@ -479,7 +479,7 @@ services:
       - 127.0.0.1:59703:59703/tcp
     container_name: edgex-app-mqtt-export
     hostname: edgex-app-mqtt-export
-    environment:
+    environment:  
       EDGEX_SECURITY_SECRET_STORE: false
       SERVICE_HOST: edgex-app-mqtt-export
       EDGEX_PROFILE: mqtt-export
