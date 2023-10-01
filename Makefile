@@ -56,7 +56,9 @@ portainer-down:
 
 pull:
 	${DOCKER_COMPOSE} -f docker-compose${NO_SECURITY}${ARM64}.yml pull ${SERVICES}
-	${DOCKER_COMPOSE} -f docker-compose${NO_SECURITY}${ARM64}.yml pull anylog-node
+	${DOCKER_COMPOSE} -f docker-compose${NO_SECURITY}${ARM64}.yml pull anylog-master
+	${DOCKER_COMPOSE} -f docker-compose${NO_SECURITY}${ARM64}.yml pull anylog-query
+	${DOCKER_COMPOSE} -f docker-compose${NO_SECURITY}${ARM64}.yml pull anylog-operator
 
 run:
 	${DOCKER_COMPOSE} -p edgex -f docker-compose${NO_SECURITY}${APP_SAMPLE}${ARM64}.yml up -d ${SERVICES}
@@ -67,8 +69,9 @@ down:
 clean:
 	$(call COMPOSE_DOWN,-v)
 	${DOCKER_COMPOSE} -p edgex -f docker-compose.yml -f docker-compose-with-app-sample.yml down -v
-	${DOCKER_COMPOSE} -p edgex -f docker-compose.yml -f docker-compose-with-app-sample.yml stop anylog-node
-	${DOCKER_COMPOSE} -p edgex -f docker-compose.yml -f docker-compose-with-app-sample.yml rm -f anylog-node
+	${DOCKER_COMPOSE} -p edgex -f docker-compose.yml -f docker-compose-with-app-sample.yml stop anylog-master
+	${DOCKER_COMPOSE} -p edgex -f docker-compose.yml -f docker-compose-with-app-sample.yml rm -f anylog-query
+	${DOCKER_COMPOSE} -p edgex -f docker-compose.yml -f docker-compose-with-app-sample.yml rm -f anylog-operator
 
 
 clean-network:
