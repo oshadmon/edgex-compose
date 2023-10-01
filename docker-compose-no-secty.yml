@@ -46,7 +46,7 @@ services:
     image: anylogco/anylog-network:beta
     restart: always
     env_file:
-      - anylog_configs/anylog_master.env
+      - anylog_configs/anylog_query.env
     environment:
       INIT_TYPE: prod
     container_name: anylog-query
