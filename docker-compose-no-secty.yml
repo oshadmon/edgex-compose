@@ -26,11 +26,43 @@
 #
 name: edgex
 services:
-  anylog-node:
+  anylog-master:
     image: anylogco/anylog-network:beta
     restart: always
     env_file:
-      - compose-builder/anylog_configs.env
+      - anylog_configs/anylog_master.env
+    environment:
+      INIT_TYPE: prod
+    container_name: anylog-master
+    stdin_open: true
+    tty: true
+    network_mode: host
+    volumes:
+      - anylog-master-anylog:/app/AnyLog-Network/anylog
+      - anylog-master-blockchain:/app/AnyLog-Network/blockchain
+      - anylog-master-data:/app/AnyLog-Network/data
+      - anylog-master-local-scripts:/app/deployment-scripts
+  anylog-query:
+    image: anylogco/anylog-network:beta
+    restart: always
+    env_file:
+      - anylog_configs/anylog_master.env
+    environment:
+      INIT_TYPE: prod
+    container_name: anylog-query
+    stdin_open: true
+    tty: true
+    network_mode: host
+    volumes:
+      - anylog-query-anylog:/app/AnyLog-Network/anylog
+      - anylog-query-blockchain:/app/AnyLog-Network/blockchain
+      - anylog-query-data:/app/AnyLog-Network/data
+      - anylog-query-local-scripts:/app/deployment-scripts
+  anylog-operator:
+    image: anylogco/anylog-network:beta
+    restart: always
+    env_file:
+      - anylog_configs/anylog_operator.env
     environment:
       INIT_TYPE: prod
     container_name: anylog-node
@@ -504,6 +536,14 @@ networks:
     name: edgex_edgex-network
     driver: bridge
 volumes:
+  anylog-master-anylog:
+  anylog-master-blockchain:
+  anylog-master-data:
+  anylog-master-local-scripts:
+  anylog-query-anylog:
+  anylog-query-blockchain:
+  anylog-query-data:
+  anylog-query-local-scripts:
   anylog-operator-anylog:
   anylog-operator-blockchain:
   anylog-operator-data:
