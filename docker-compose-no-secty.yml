@@ -27,7 +27,7 @@
 name: edgex
 services:
   anylog-master:
-    image: anylogco/anylog-network:beta
+    image: anylogco/anylog-node:latest
     restart: always
     env_file:
       - anylog_configs/anylog_master.env
@@ -44,7 +44,7 @@ services:
       - anylog-master-data:/app/AnyLog-Network/data
       - anylog-master-local-scripts:/app/deployment-scripts
   anylog-query:
-    image: anylogco/anylog-network:beta
+    image: anylogco/anylog-node:latest
     restart: always
     env_file:
       - anylog_configs/anylog_query.env
@@ -62,13 +62,13 @@ services:
       - anylog-query-data:/app/AnyLog-Network/data
       - anylog-query-local-scripts:/app/deployment-scripts
   anylog-operator:
-    image: anylogco/anylog-network:beta
+    image: anylogco/anylog-node:latest
     restart: always
     env_file:
-      - anylog_configs/anylog_operator.env
+      - anylog_configs/anylog_operator1.env
     environment:
       INIT_TYPE: prod
-    container_name: anylog-node
+    container_name: anylog-operator1
     stdin_open: true
     tty: true
     network_mode: host
