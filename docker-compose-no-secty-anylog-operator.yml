@@ -33,30 +33,15 @@ services:
       - anylog_configs/anylog_operator2.env
     environment:
       INIT_TYPE: prod
-    container_name: anylog-operator1
+    container_name: anylog-operator2
     stdin_open: true
     tty: true
     network_mode: host
-    depends_on:
-      - anylog-master
     volumes:
       - anylog-operator-anylog:/app/AnyLog-Network/anylog
       - anylog-operator-blockchain:/app/AnyLog-Network/blockchain
       - anylog-operator-data:/app/AnyLog-Network/data
       - anylog-operator-local-scripts:/app/deployment-scripts
-  remote-cli:
-    image: anylogco/remote-cli:latest
-    container_name: remote-cli
-    restart: always
-    stdin_open: true
-    tty: true
-    network_mode: "host"
-    environment:
-      - CONN_IP=0.0.0.0
-      - CLI_PORT=31800
-    volumes:
-      - remote-cli:/app/Remote-CLI/djangoProject/static/json
-      - remote-cli-current:/app/Remote-CLI/djangoProject/static/blobs/current/
   app-rules-engine:
     container_name: edgex-app-rules-engine
     depends_on:
