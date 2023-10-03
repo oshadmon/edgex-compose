@@ -16,8 +16,8 @@ services:
       - anylog-master-blockchain:/app/AnyLog-Network/blockchain
       - anylog-master-data:/app/AnyLog-Network/data
       - anylog-master-local-scripts:/app/deployment-scripts
-  volumes:
-    anylog-master-anylog:
-    anylog-master-blockchain:
-    anylog-master-data:
-    anylog-master-local-scripts:
+volumes:
+  anylog-master-anylog:
+  anylog-master-blockchain:
+  anylog-master-data:
+  anylog-master-local-scripts:
