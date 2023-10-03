@@ -1,0 +1,39 @@
+version: '3.7'
+services:
+  anylog-query:
+    image: anylogco/anylog-node:latest
+    restart: always
+    env_file:
+      - ~/edgex-compose/anylog_configs/anylog_query.env
+    environment:
+      INIT_TYPE: prod
+    container_name: anylog-query
+    stdin_open: true
+    tty: true
+    network_mode: host
+    volumes:
+      - anylog-query-anylog:/app/AnyLog-Network/anylog
+      - anylog-query-blockchain:/app/AnyLog-Network/blockchain
+      - anylog-query-data:/app/AnyLog-Network/data
+      - anylog-query-local-scripts:/app/deployment-scripts
+      - remote-cli-current:/app/Remote-CLI/djangoProject/static/blobs/current/
+  remote-cli:
+      image: anylogco/remote-cli:latest
+      container_name: remote-cli
+      restart: always
+      stdin_open: true
+      tty: true
+      network_mode: "host"
+      environment:
+        - CONN_IP=0.0.0.0
+        - CLI_PORT=31800
+      volumes:
+        - remote-cli:/app/Remote-CLI/djangoProject/static/json
+        - remote-cli-current:/app/Remote-CLI/djangoProject/static/blobs/current/
+  volumes:
+    anylog-query-anylog:
+    anylog-query-blockchain:
+    anylog-query-data:
+    anylog-query-local-scripts:
+    remote-cli:
+    remote-cli-current:

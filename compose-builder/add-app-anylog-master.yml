@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  anylog-master:
+    image: anylogco/anylog-node:latest
+    restart: always
+    env_file:
+      - ~/edgex-compose/anylog_configs/anylog_master.env
+    environment:
+      INIT_TYPE: prod
+    container_name: anylog-master
+    stdin_open: true
+    tty: true
+    network_mode: host
+    volumes:
+      - anylog-master-anylog:/app/AnyLog-Network/anylog
+      - anylog-master-blockchain:/app/AnyLog-Network/blockchain
+      - anylog-master-data:/app/AnyLog-Network/data
+      - anylog-master-local-scripts:/app/deployment-scripts
+  volumes:
+    anylog-master-anylog:
+    anylog-master-blockchain:
+    anylog-master-data:
+    anylog-master-local-scripts:
