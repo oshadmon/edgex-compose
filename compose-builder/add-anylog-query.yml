@@ -4,7 +4,7 @@ services:
     image: anylogco/anylog-node:latest
     restart: always
     env_file:
-      - ~/edgex-compose/anylog_configs/anylog_query.env
+      - anylog_query.env
     environment:
       INIT_TYPE: prod
     container_name: anylog-query

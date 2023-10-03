@@ -96,7 +96,7 @@ endif
 ifeq (arm64, $(filter arm64,$(ARGS)))
 	export ARCH=-arm64
 else
-	export ARCH=
+	export ARCH=""
 endif
 
 ifeq (mqtt-verbose, $(filter mqtt-verbose,$(ARGS)))
