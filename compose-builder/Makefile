@@ -489,6 +489,9 @@ ifeq (anylog-operator, $(filter anylog-operator,$(ARGS)))
     COMPOSE_FILES:=$(COMPOSE_FILES) -f add-anylog-operator.yml
 endif
 
+ifeq (anylog-remote-cli, $(filter anylog-remote-cli,$(ARG)))
+	COMPOSE_FILES:=$(COMPOSE_FILES) -f add-anylog-remote-cli.yml
+endif
 
 # Add Application Services
 ifeq (asc-http, $(filter asc-http,$(ARGS)))
