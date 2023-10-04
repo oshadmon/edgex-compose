@@ -477,15 +477,15 @@ ifeq (modbus-sim, $(filter modbus-sim,$(ARGS)))
 endif
 
 # Add AnyLog service - Query node also installs Remote-CLI against port 31800 (can be changed in docker-compose file)
-ifeq ( anylog-master $(filter anylog-master,$(ARGS)) )
+ifeq (anylog-master, $(filter anylog-master,$(ARGS)))
     COMPOSE_FILES:=$(COMPOSE_FILES) -f add-anylog-master.yml
 endif
 
-ifeq ( anylog-query $(filter anylog-query,$(ARGS)) )
+ifeq (anylog-query, $(filter anylog-query,$(ARGS)))
     COMPOSE_FILES:=$(COMPOSE_FILES) -f add-anylog-query.yml
 endif
 
-ifeq ( anylog-operator $(filter anylog-operator,$(ARGS)) )
+ifeq (anylog-operator, $(filter anylog-operator,$(ARGS)))
     COMPOSE_FILES:=$(COMPOSE_FILES) -f add-anylog-operator.yml
 endif
 
