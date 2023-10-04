@@ -788,9 +788,6 @@ ifeq (taf-secty, $(filter taf-secty,$(ARGS)))
 		-f add-taf-app-services-secure.yml \
 		-f add-asc-http-export.yml \
 		-f add-asc-mqtt-export.yml \
-		-f add-anylog-master.yml \
-		-f add-anylog-operator.yml \
-		-f add-anylog-query.yml \
 		-f add-asc-external-mqtt-trigger.yml \
 		-f add-asc-sample.yml \
 		-f add-device-virtual.yml \
@@ -916,6 +913,9 @@ export SPIFFE_ENDPOINTSOCKET
 define COMPOSE_DOWN
 	${DOCKER_COMPOSE} -p edgex \
 		-f docker-compose-base.yml \
+		-f add-anylog-master.yml \
+		-f add-anylog-operator.yml \
+		-f add-anylog-query.yml \
 		-f add-device-bacnet-ip.yml \
 		-f add-device-bacnet-mstp.yml \
 		-f add-device-onvif-camera.yml \
