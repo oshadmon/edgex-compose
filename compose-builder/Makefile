@@ -476,6 +476,11 @@ ifeq (modbus-sim, $(filter modbus-sim,$(ARGS)))
 	COMPOSE_FILES:=$(COMPOSE_FILES) -f add-modbus-simulator.yml
 endif
 
+# MQTT Export
+ifeq (asc-mqtt-export, $(filter, asc-mqtt-export))
+	COMPOSE_FILES:=$(COMPOSE_FILES) -f add-asc-mqtt-export.yml
+endif
+
 # Add AnyLog service - Query node also installs Remote-CLI against port 31800 (can be changed in docker-compose file)
 ifeq (anylog-master, $(filter anylog-master,$(ARGS)))
     COMPOSE_FILES:=$(COMPOSE_FILES) -f add-anylog-master.yml
